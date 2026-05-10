@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { HiOutlineMenuAlt2 } from 'react-icons/hi';
+import { HiOutlineMenuAlt2, HiOutlineSun, HiOutlineMoon } from 'react-icons/hi';
 
 const pageTitles = {
   '/': 'Dashboard',
@@ -9,7 +9,7 @@ const pageTitles = {
   '/settings': 'Settings',
 };
 
-const Navbar = ({ onMenuClick }) => {
+const Navbar = ({ onMenuClick, theme, onThemeToggle }) => {
   const location = useLocation();
   const title = pageTitles[location.pathname] || 'ExpenseIQ';
 
@@ -22,11 +22,16 @@ const Navbar = ({ onMenuClick }) => {
         <h1 className="navbar-title">{title}</h1>
       </div>
       <div className="navbar-right">
-        <span className="navbar-date">
-          {new Date().toLocaleDateString('en-US', { 
-            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
-          })}
-        </span>
+        <div className="navbar-actions">
+          <span className="navbar-date">
+            {new Date().toLocaleDateString('en-US', { 
+              weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+            })}
+          </span>
+          <button className="theme-toggle" onClick={onThemeToggle} title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}>
+            {theme === 'light' ? <HiOutlineMoon /> : <HiOutlineSun />}
+          </button>
+        </div>
       </div>
     </header>
   );

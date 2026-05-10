@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -17,6 +17,14 @@ import './index.css';
 const AppLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
   return (
     <div className="app-layout">
@@ -27,7 +35,11 @@ const AppLayout = () => {
         onToggleCollapse={() => setIsCollapsed(!isCollapsed)}
       />
       <div className={`main-content ${isCollapsed ? 'collapsed' : ''}`}>
-        <Navbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
+        <Navbar 
+          onMenuClick={() => setSidebarOpen(!sidebarOpen)} 
+          theme={theme} 
+          onThemeToggle={toggleTheme} 
+        />
         <div className="page-content">
           <Routes>
             <Route path="/" element={<Dashboard />} />
