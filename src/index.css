@@ -86,7 +86,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 
 .form-group{display:flex;flex-direction:column;gap:6px}
 .form-group label{font-size:13px;font-weight:500;color:var(--text-secondary)}
-.form-group input,.form-group select{padding:12px 14px;background:#fff;border:1px solid rgba(15,23,42,0.15);border-radius:8px;color:var(--text-primary);font-size:14px;font-family:inherit;outline:none;transition:.2s}
+.form-group input,.form-group select{padding:12px 14px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;color:var(--text-primary);font-size:14px;font-family:inherit;outline:none;transition:.2s}
 .form-group input:focus,.form-group select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(103,13,47,0.1)}
 .form-group input::placeholder{color:var(--text-muted)}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
