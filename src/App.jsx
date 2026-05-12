@@ -17,11 +17,26 @@ import './index.css';
 const AppLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  
+  // Safe localStorage access
+  const getInitialTheme = () => {
+    try {
+      const saved = localStorage.getItem('theme');
+      return saved || 'light';
+    } catch {
+      return 'light';
+    }
+  };
+  
+  const [theme, setTheme] = useState(getInitialTheme());
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+    try {
+      localStorage.setItem('theme', theme);
+    } catch (e) {
+      console.warn('LocalStorage not available:', e);
+    }
   }, [theme]);
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');

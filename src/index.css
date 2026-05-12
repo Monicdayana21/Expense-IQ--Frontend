@@ -90,6 +90,15 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .form-group input,.form-group select{padding:12px 14px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;color:var(--text-primary);font-size:14px;font-family:inherit;outline:none;transition:.2s}
 .form-group input:focus,.form-group select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(103,13,47,0.1)}
 .form-group input::placeholder{color:var(--text-muted)}
+
+/* Fix for browser autofill background/text colors */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px var(--bg-secondary) inset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 
 .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:10px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;border:none;transition:.2s}
